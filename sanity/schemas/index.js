@@ -14,6 +14,7 @@ import fieldButton from './Fields/fieldButton'
 import imageText from './PageBuilder/imageText'
 import videoEmbed from './PageBuilder/videoEmbed'
 import fieldMenuItem from './Fields/fieldMenuItem'
+import fieldSocialAccount from './Fields/fieldSocialAccount'
 
 export const schemaTypes = [
     // Fields
@@ -21,6 +22,7 @@ export const schemaTypes = [
     fieldPublished,
     fieldButton,
     fieldMenuItem,
+    fieldSocialAccount,
     blockContent,
 
     // Pages/Posts

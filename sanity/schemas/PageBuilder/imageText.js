@@ -1,16 +1,16 @@
 import { FaCog } from "react-icons/fa";
-import { MdFormatAlignLeft, MdImage, MdVerticalSplit } from "react-icons/md";
+import { MdArtTrack, MdImage } from "react-icons/md";
 
 export default {
     name: "imageText",
     type: "object",
-    icon: MdVerticalSplit,
+    icon: MdArtTrack,
     title: "Image with text",
     groups: [
       {
         name: 'content',
         title: 'Content',
-        icon: MdFormatAlignLeft,
+        icon: MdArtTrack,
         default: true
       },
       {

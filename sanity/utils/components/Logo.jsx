@@ -11,14 +11,13 @@ function Logo(props) {
     };
 
     const styles = `
-        '--brand-primary': red;
         
         [data-testid="field-group-tabs"] > div:first-of-type {
             display: none;
         }
 
         [data-testid="field-groups"] {
-            position: fixed;
+            position: sticky;
             top: 0;
             z-index: 20;
             padding: 20px 0;
