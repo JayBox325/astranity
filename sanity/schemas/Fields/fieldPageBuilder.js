@@ -5,9 +5,10 @@ export default {
   title: 'Page builder',
   group: 'content',
   of: [
-    {type: 'bodyText'},
-    {type: 'bodyImages'},
     {type: 'accordions'},
-    {type: 'imageText'}
+    {type: 'bodyImages'},
+    {type: 'bodyText'},
+    {type: 'imageText'},
+    {type: 'videoEmbed'}
   ]
 }

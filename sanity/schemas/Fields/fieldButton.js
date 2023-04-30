@@ -3,6 +3,7 @@ import { defineType } from 'sanity'
 export default defineType({
     name: 'fieldButton',
     type: 'object',
+    title: 'Button',
     fields: [
         {
             name: 'label',

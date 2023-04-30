@@ -18,8 +18,7 @@ export default defineType({
         type: 'array',
         of: [
             {
-                type: 'reference',
-                to: [{ type: 'site' }],
+                type: 'fieldMenuItem'
             },
         ]
     })

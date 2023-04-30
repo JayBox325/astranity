@@ -2,6 +2,7 @@ import { defineType } from 'sanity'
 
 export default defineType({
     name: 'fieldAccordions',
+    title: 'Accordions',
     type: 'object',
     fields: [
         {
