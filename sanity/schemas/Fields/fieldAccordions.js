@@ -1,8 +1,10 @@
 import { defineType } from 'sanity'
+import { MdOutlineAddCircle } from 'react-icons/md'
 
 export default defineType({
     name: 'fieldAccordions',
     title: 'Accordions',
+    icon: MdOutlineAddCircle,
     type: 'object',
     fields: [
         {

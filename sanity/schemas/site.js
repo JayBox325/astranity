@@ -1,11 +1,12 @@
 import {defineField, defineType} from 'sanity'
 import {createClient} from '@sanity/client'
 
-import { MdEditDocument,MdViewComfy } from "react-icons/md"
+import { MdEditDocument,MdViewComfy, MdOutlineScreenSearchDesktop, MdInsertDriveFile } from "react-icons/md"
 import { FaCog } from "react-icons/fa"
 import fieldPublished from './Fields/fieldPublished'
 import fieldExtract from './Fields/fieldExtract'
 import fieldPageBuilder from './Fields/fieldPageBuilder'
+import fieldSeo from './Fields/fieldSeo'
 
 async function asyncSlugifier(input) {
 
@@ -35,6 +36,7 @@ async function asyncSlugifier(input) {
 export default defineType({
   name: 'site',
   title: 'Site',
+  icon: MdInsertDriveFile,
   type: 'document',
 
   groups: [
@@ -53,6 +55,11 @@ export default defineType({
       name: 'options',
       icon: FaCog,
       title: 'Options'
+    },
+    {
+      name: 'seo',
+      icon: MdOutlineScreenSearchDesktop,
+      title: 'SEO'
     }
   ],
 
@@ -66,6 +73,7 @@ export default defineType({
       type: 'string',
       validation: Rule => Rule.required()
     }),
+    defineField(fieldSeo),
     defineField({
       name: 'slug',
       title: 'Slug',

@@ -33,11 +33,12 @@ export default defineType({
 
     preview: {
       select: {
-        account: 'account'
+        account: 'account',
+        url: 'url'
       },
 
       prepare(selection) {
-        const {account} = selection
+        const {account, url} = selection
 
         function icon(account) {
           switch (account) {
@@ -67,8 +68,9 @@ export default defineType({
   
         return {
           ...selection,
-          title: `${account} here`,
-          icon: icon(account)
+          title: `${account}`,
+          icon: icon(account),
+          subtitle: url
         }
       },
     },

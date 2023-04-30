@@ -9,6 +9,8 @@ export default {
     {type: 'bodyImages'},
     {type: 'bodyText'},
     {type: 'imageText'},
-    {type: 'videoEmbed'}
+    {type: 'pullQuote'},
+    {type: 'videoEmbed'},
+    {type: 'siteContent'}
   ]
 }

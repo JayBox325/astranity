@@ -1,7 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
-import { MdDensityMedium } from "react-icons/md"
+import { MdDensityMedium, MdHorizontalSplit,MdOutlineScreenSearchDesktop } from "react-icons/md"
 import { FaCog } from "react-icons/fa"
+import fieldSeo from './Fields/fieldSeo'
 
 export default defineType({
   name: 'siteConfig',
@@ -10,16 +11,26 @@ export default defineType({
 
   groups: [
     {
-      name: 'default',
-      title: 'Site Settings',
-      icon: FaCog,
+      name: 'navigation',
+      icon: MdDensityMedium,
+      title: 'Main Menu',
       default: true
     },
     {
-      name: 'navigation',
-      icon: MdDensityMedium,
-      title: 'Main Menu'
-    }
+      name: 'footer',
+      icon: MdHorizontalSplit,
+      title: 'Footer'
+    },
+    {
+      name: 'default',
+      title: 'Site Settings',
+      icon: FaCog
+    },
+    {
+      name: 'seo',
+      title: 'Global SEO',
+      icon: MdOutlineScreenSearchDesktop
+    },
   ],
 
   fields: [
@@ -43,15 +54,22 @@ export default defineType({
         ]
     }),
     defineField({
+      name: 'body',
+      type: 'blockContent',
+      title: 'Footer Body',
+      group: 'footer'
+    }),
+    defineField({
         title: 'Social Accounts',
         name: 'socialAccounts',
-        group: 'default',
+        group: 'footer',
         type: 'array',
         of: [
             {
                 type: 'fieldSocialAccount'
             },
         ]
-    })
+    }),
+    defineField(fieldSeo),
   ]
 })

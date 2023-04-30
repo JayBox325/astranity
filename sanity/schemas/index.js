@@ -15,13 +15,19 @@ import imageText from './PageBuilder/imageText'
 import videoEmbed from './PageBuilder/videoEmbed'
 import fieldMenuItem from './Fields/fieldMenuItem'
 import fieldSocialAccount from './Fields/fieldSocialAccount'
+import fieldSeo from './Fields/fieldSeo'
+import pullQuote from './PageBuilder/pullQuote'
+import siteContent from './PageBuilder/siteContent'
+import fieldSiteContent from './Fields/fieldSiteContent'
 
 export const schemaTypes = [
     // Fields
     fieldAccordions,
     fieldPublished,
+    fieldSiteContent,
     fieldButton,
     fieldMenuItem,
+    fieldSeo,
     fieldSocialAccount,
     blockContent,
 
@@ -37,6 +43,8 @@ export const schemaTypes = [
     bodyText,
     bodyImages,
     videoEmbed,
+    siteContent,
     imageText,
+    pullQuote,
     accordions
 ]

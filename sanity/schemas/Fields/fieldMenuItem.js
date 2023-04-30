@@ -1,8 +1,10 @@
+import { MdInsertDriveFile } from 'react-icons/md'
 import { defineType } from 'sanity'
 
 export default defineType({
     name: 'fieldMenuItem',
     title: 'Menu Item',
+    icon: MdInsertDriveFile,
     type: 'object',
     fields: [
         {
@@ -16,6 +18,7 @@ export default defineType({
         {
             title: 'Children',
             name: 'childItems',
+            icon: MdInsertDriveFile,
             type: 'array',
             of: [
                 {

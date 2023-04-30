@@ -1,13 +1,15 @@
 import {defineField, defineType} from 'sanity'
-import { MdEditDocument,MdViewComfy } from "react-icons/md"
+import { MdEditDocument,MdInsertDriveFile,MdOutlineScreenSearchDesktop,MdViewComfy } from "react-icons/md"
 import { FaCog } from "react-icons/fa"
 import fieldPublished from './Fields/fieldPublished'
 import fieldExtract from './Fields/fieldExtract'
 import fieldPageBuilder from './Fields/fieldPageBuilder'
+import fieldSeo from './Fields/fieldSeo'
 
 export default defineType({
   name: 'post',
   title: 'Post',
+  icon: MdInsertDriveFile,
   type: 'document',
   groups: [
     {
@@ -25,6 +27,11 @@ export default defineType({
       name: 'options',
       icon: FaCog,
       title: 'Options'
+    },
+    {
+      name: 'seo',
+      icon: MdOutlineScreenSearchDesktop,
+      title: 'SEO'
     }
   ],
   fields: [
@@ -78,6 +85,7 @@ export default defineType({
       group: 'options',
       of: [{type: 'reference', to: {type: 'category'}}],
     }),
+    defineField(fieldSeo),
   ],
 
   preview: {

@@ -1,6 +1,7 @@
 import {defineField, defineType} from 'sanity'
 import fieldPageBuilder from './Fields/fieldPageBuilder'
-import { MdViewComfy } from "react-icons/md"
+import { MdOutlineScreenSearchDesktop, MdViewComfy } from "react-icons/md"
+import fieldSeo from './Fields/fieldSeo'
 
 export default defineType({
   name: 'homepage',
@@ -14,6 +15,11 @@ export default defineType({
       title: 'Content',
       default: true
     },
+    {
+      name: 'seo',
+      icon: MdOutlineScreenSearchDesktop,
+      title: 'SEO'
+    },
   ],
   
   fields: [
@@ -26,6 +32,7 @@ export default defineType({
         hotspot: true
       }
     }),
+    defineField(fieldSeo),
     defineField(fieldPageBuilder),
   ]
 })

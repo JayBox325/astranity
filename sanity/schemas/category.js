@@ -1,8 +1,10 @@
+import { MdLabel } from 'react-icons/md'
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'category',
   title: 'Category',
+  icon: MdLabel,
   type: 'document',
   fields: [
     defineField({
