@@ -62,7 +62,7 @@ export default defineType({
     defineField({
         title: 'Social Accounts',
         name: 'socialAccounts',
-        group: 'footer',
+        group: 'default',
         type: 'array',
         of: [
             {

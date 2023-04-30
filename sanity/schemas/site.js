@@ -121,7 +121,7 @@ export default defineType({
     },
     prepare(selection) {
       const {parent} = selection
-      return {...selection, subtitle: parent && `\u21B3 ${parent}`}
+      return {...selection, subtitle: parent && `\u2196 ${parent}`}
     },
   },
 })
