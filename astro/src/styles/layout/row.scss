@@ -1,0 +1,41 @@
+.row {
+    @apply relative py-10 md:py-14 lg:py-16 xl:py-32 2xl:py-44;
+
+    &.row--white + .row--white,
+    &.row--gray + .row--gray,
+    &.row--black + .row--black {
+        @apply pt-0;
+    }
+
+    &:not(.row--no-bg) {
+        &:before {
+            @apply z-[-1] absolute top-0 left-0 right-0 bottom-0;
+            content: '';
+        }
+    }
+
+    &--white {
+        &:before {
+            @apply bg-white;
+        }
+    }
+
+    &--gray,
+    &--grey {
+        &:before {
+            @apply bg-gray-200;
+        }
+    }
+
+    &--black {
+        @apply text-white;
+        
+        &:before {
+            @apply bg-black;
+        }
+    }
+
+    > * {
+        @apply relative z-10;
+    }
+}

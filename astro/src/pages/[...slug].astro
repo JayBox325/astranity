@@ -1,0 +1,69 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { useSanityClient } from "astro-sanity";
+
+export async function getStaticPaths() {
+  const site = await useSanityClient().fetch(`*[_type == "site"]{
+    title,
+    slug,
+    "imageUrl": mainImage.asset->url,
+    "imageMeta": mainImage.asset->metadata,
+    "imagePalette": mainImage.asset->metadata.palette,
+    extract,
+    parent->{
+      title
+    },
+    fieldSeo,
+    // pageBuilder,
+  }`);
+
+  return site.map((item) => {
+    return {
+      params: { slug: item.slug.current },
+      props: item,
+    };
+  });
+}
+
+console.log('✅', Astro.props)
+
+const {
+  title,
+  slug,
+  mainImage,
+  extract,
+  parent,
+  fieldSeo,
+  pageBuilder = []
+} = Astro.props;
+---
+
+<Layout title={title}>
+    <div class="grid grid-cols-1 gap-4">
+        <div class="col-span-1">
+            Page title: {title ?? "None"}
+        </div>
+        <div class="col-span-1">
+            Slug: {slug ?? "None"}
+        </div>
+        <div class="col-span-1">
+            Extract: {extract ?? "None"}
+        </div>
+        <div class="col-span-1">
+            Main Image: {mainImage?.asset?._ref ?? "None"}
+        </div>
+        <div class="col-span-1">
+            Parent: {parent.title ?? "None"}
+        </div>
+        <div class="col-span-1">
+            SEO Title: {fieldSeo.title ?? "None"},<br />
+            SEO Description: {fieldSeo.description ?? "None"}
+        </div>
+        <div class="col-span-1">
+            Page Builder: {pageBuilder.length} items<br /><br />
+            {pageBuilder.map((item,n) => (
+                <span>{item._type}</span><br />
+            ))}
+        </div>
+    </div>
+</Layout>

@@ -60,7 +60,6 @@ export default defineType({
     defineField(fieldPageBuilder),
 
     // Options
-    defineField(fieldPublished),
     defineField({
       name: 'author',
       title: 'Author',

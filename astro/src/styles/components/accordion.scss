@@ -1,0 +1,13 @@
+.accordion__panel {
+    .accordion.is-active & {
+        @apply bg-green-500 grid-rows-[1fr];
+    }
+}
+
+.accordion__content {
+    @apply delay-[400ms] invisible;
+
+    .accordion.is-active & {
+        @apply delay-0 visible;
+    }
+}

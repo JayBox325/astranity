@@ -1,0 +1,10 @@
+@tailwind base;
+// @tailwind components;
+
+@import'./components/accordion.scss';
+
+@import'./layout/container.scss';
+@import'./layout/row.scss';
+
+
+@tailwind utilities;
