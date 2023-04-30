@@ -71,11 +71,12 @@ export default {
       select: {
         heading: 'heading',
         body: 'body',
+        alignment: 'alignment'
       },
       prepare(selection) {
-        const {heading, body} = selection
+        const {heading, alignment} = selection
   
-        return {...selection, title: 'Image Text', subtitle: heading ?? null}
+        return {...selection, title: 'Image Text', subtitle: `${alignment}${heading ? `, ${heading}` : ''}`}
       },
     },
   }

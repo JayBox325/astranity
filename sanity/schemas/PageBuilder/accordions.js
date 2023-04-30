@@ -33,7 +33,7 @@ export default {
       prepare(selection) {
         const {accordions, title} = selection
   
-        return {...selection, title: 'Accordions', subtitle: `${title ? `${title} (` : ''}${accordions.length}x accordions${title ? ')' : ''}`}
+        return {...selection, title: 'Accordions', subtitle: `${title ? `${title} (` : ''}${accordions.length}x accordion${accordions.length == 1 ? '' : 's'}${title ? ')' : ''}`}
       },
     },
   }

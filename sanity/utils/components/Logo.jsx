@@ -11,9 +11,32 @@ function Logo(props) {
     };
 
     const styles = `
+        '--brand-primary': red;
+        
         [data-testid="field-group-tabs"] > div:first-of-type {
             display: none;
         }
+
+        [data-testid="field-groups"] {
+            position: fixed;
+            top: 0;
+            z-index: 20;
+            padding: 20px 0;
+
+            &:before {
+                position: absolute;
+                content: '';
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        [data-ui="Container"] {
+            padding-bottom: 60px;
+        }
+
     `
 
     return (

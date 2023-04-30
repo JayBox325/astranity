@@ -3,7 +3,7 @@ import { deskTool } from 'sanity/desk'
 import { schemaTypes } from './schemas'
 import { media } from 'sanity-plugin-media'
 
-import { MdEditDocument, MdHomeFilled, MdImage, MdPerson, MdLabel, MdFormatAlignLeft } from "react-icons/md";
+import { MdEditDocument, MdHomeFilled, MdPerson, MdLabel, MdFormatAlignLeft } from "react-icons/md";
 import { FaCogs } from 'react-icons/fa'
 import Logo from './utils/components/Logo';
 
