@@ -1,9 +1,10 @@
 import { FaFilm } from "react-icons/fa"
+import { ImVimeo, ImYoutube } from "react-icons/im";
 
 export default {
     name: "videoEmbed",
     type: "object",
-    icon: FaFilm,
+    // icon: FaFilm,
     title: "Video Embed",
     fields: [
       {
@@ -51,8 +52,29 @@ export default {
       },
       prepare(selection) {
         const {type} = selection
+
+        function icon(type) {
+          switch (type) {
+            case 'Vimeo (distribution link)':
+              return ImVimeo
+              break;
+            case 'Vimeo':
+              return ImVimeo
+              break;
+            case 'YouTube':
+              return ImYoutube
+              break;
+          
+            default:
+              break;
+          }
+        }
   
-        return {...selection, title: 'Video Embed', subtitle: type ?? ''}
-      },
-    },
+        return {
+          ...selection,
+          title: 'Video Embed',
+          icon: icon(type)
+        }
+      }
+    }
   }
