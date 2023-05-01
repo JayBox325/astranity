@@ -1,7 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro'
+import Layout from '../components/_Layout/index.astro'
+import { getGlobalData } from '../utils/sanity/queries/getGlobalData';
+const globalData = await getGlobalData()
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout globalData={globalData} title="404">
 	<h1>404 template</h1>
 </Layout>

@@ -1,0 +1,50 @@
+---
+import PortableText from "../../../components/PortableText/index.astro"
+import SocialIcons from "../../../components/SocialIcons/index.astro"
+
+const currentYear = new Date().getFullYear()
+const { globalData } = Astro.props;
+
+// console.log('global', globalData)
+
+---
+
+<footer class="row row--black py-10">
+  <div class="container">
+    <div class="grid gap-6 grid-cols-6 lg:grid-cols-12">
+
+      <div class="col-span-6 flex flex-col gap-4">
+        <PortableText portableText={globalData.footerBody} className={"max-w-lg"}/>
+        <SocialIcons socialAccounts={globalData.socialAccounts} />
+        <p class="text-sm pt-10">
+          &copy; {currentYear} - Starter Theme for <a href="https://astro.build/">Astro</a>.
+        </p>
+      </div>
+
+      <div class="col-span-6">
+        <ul>
+          {globalData.mainNav.map((item,n)=>{
+            return (
+              <li>
+                <a href={`/${item.menuItem.slug.current}`}>{item.menuItem.title}</a>
+                {item.childItems?.length ? (
+                  <ul>
+                    {item.childItems.map((child,n)=>{
+                      console.log('child', child)
+                      return (
+                        <li>
+                          - <a href={`/${child?.childItem?.slug?.current}`}>{child.childItem?.title}</a>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                ) : ''}
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</footer>

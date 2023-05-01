@@ -54,7 +54,7 @@ export default defineType({
         ]
     }),
     defineField({
-      name: 'body',
+      name: 'footerBody',
       type: 'blockContent',
       title: 'Footer Body',
       group: 'footer'

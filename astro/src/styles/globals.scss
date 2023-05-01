@@ -1,6 +1,8 @@
 @tailwind base;
 // @tailwind components;
 
+@import'./typography/rich.scss';
+
 @import'./components/accordion.scss';
 
 @import'./layout/container.scss';

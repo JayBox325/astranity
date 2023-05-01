@@ -1,0 +1,25 @@
+---
+const { id } = Astro.props;
+---
+
+<li class="border-t-2 border-black accordion" data-accordion-item>
+    <h3>
+        <button
+            data-accordion-btn
+            aria-expanded="false"
+            aria-controls={`accordion-panel-${id}`}
+            class="py-2 flex items-center justify-between xl:py-3 block w-full text-left"
+        >
+            Accordion item
+        </button>
+    </h3>
+    <div
+        id={`accordion-panel-${id}`}
+        aria-labelledby={`accordion-panel-${id}`}
+        class={`grid transition-all relative duration-[400ms] grid-rows-[0fr] bg-red-500 accordion__panel`}
+    >
+        <div class={`overflow-hidden accordion__content`}>
+            <p>Accordion content here</p>
+        </div>
+    </div>
+</li>

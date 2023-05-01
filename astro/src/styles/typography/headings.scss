@@ -1,0 +1,60 @@
+h1,
+.title-1,
+h2,
+.title-2,
+h3,
+.title-3,
+h4,
+.title-4,
+h5,
+.title-5,
+h6,
+.title-6 {
+    @apply leading-tight font-sans;
+
+    strong {
+        @apply font-sans font-normal text-highlight-500;
+    }
+}
+
+h1,
+.title-1 {
+    @apply tracking-tight leading-[100%] xl:leading-[90%];
+    $map: (576px: 42px, 768px: 48px, 1280: 54px, 1728px: 72px);
+    @include poly-fluid-sizing('font-size', $map);
+}
+
+h2,
+.title-2 {
+    @apply tracking-tight leading-[107%] md:leading-[111%] xl:leading-[100%];
+    $map: (576px: 30px, 768px: 36px, 1280: 42px, 1728px: 60px);
+    @include poly-fluid-sizing('font-size', $map);
+}
+
+h3,
+.title-3 {
+    @apply leading-[117%] md:leading-[111%] xl:leading-[100%];
+    $map: (576px: 24px, 768px: 36px, 1280: 36px, 1728px: 48px);
+    @include poly-fluid-sizing('font-size', $map);
+}
+
+h4,
+.title-4 {
+    @apply leading-[117%] md:leading-[120%] xl:leading-[111%];
+    $map: (576px: 24px, 768px: 30px, 1280: 30px, 1728px: 36px);
+    @include poly-fluid-sizing('font-size', $map);
+}
+
+h5,
+.title-5 {
+    @apply leading-[120%] md:leading-[117%] xl:leading-[120%];
+    $map: (576px: 20px, 768px: 24px, 1280: 24px, 1728px: 30px);
+    @include poly-fluid-sizing('font-size', $map);
+}
+
+h6,
+.title-6 {
+    @apply leading-[120%] md:leading-[117%] xl:leading-[120%];
+    $map: (576px: 20px, 768px: 24px, 1728px: 30px);
+    @include poly-fluid-sizing('font-size', $map);
+}

@@ -1,6 +1,9 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from '../components/_Layout/index.astro'
 import { useSanityClient } from "astro-sanity";
+import { getGlobalData } from "../utils/sanity/queries/getGlobalData";
+
+const globalData = await getGlobalData()
 
 export async function getStaticPaths() {
   const site = await useSanityClient().fetch(`*[_type == "site"]{
@@ -13,7 +16,8 @@ export async function getStaticPaths() {
     },
     extract,
     parent->{
-      title
+      title,
+      slug
     },
     fieldSeo,
     // pageBuilder,
@@ -40,32 +44,44 @@ const {
 } = Astro.props;
 ---
 
-<Layout title={title}>
-    <div class="grid grid-cols-1 gap-4">
-        <div class="col-span-1">
-            Page title: {title ?? "None"}
-        </div>
-        <div class="col-span-1">
-            Slug: {slug ?? "None"}
-        </div>
-        <div class="col-span-1">
-            Extract: {extract ?? "None"}
-        </div>
-        <div class="col-span-1">
-            Main Image URL: {mainImage.url ?? "None"}
-        </div>
-        <div class="col-span-1">
-            Parent: {parent.title ?? "None"}
-        </div>
-        <div class="col-span-1">
-            SEO Title: {fieldSeo.title ?? "None"},<br />
-            SEO Description: {fieldSeo.description ?? "None"}
-        </div>
-        <div class="col-span-1">
-            Page Builder: {pageBuilder.length} items<br /><br />
-            {pageBuilder.map((item,n) => (
-                <span>{item._type}</span><br />
-            ))}
-        </div>
+<Layout globalData={globalData} title={title}>
+  <section class="row row--gray">
+    <div class="container">
+      <div class="grid grid-cols-1 gap-4">
+          <div class="col-span-1">
+              Page title: {title ?? "None"}
+          </div>
+          <div class="col-span-1">
+              Slug: {slug ? slug.current : "None"}
+          </div>
+          <div class="col-span-1">
+              Extract: {extract ?? "None"}
+          </div>
+          <div class="col-span-1">
+              Main Image URL: {mainImage.url ?? "None"}
+          </div>
+          <div class="col-span-1">
+              Parent: {parent ? (
+                <a href={`/${parent.slug.current}`}>{parent?.title}</a>
+              ) : "None"}
+          </div>
+          <div class="col-span-1">
+              SEO Title: {fieldSeo?.title ?? "None"},<br />
+              SEO Description: {fieldSeo?.description ?? "None"}
+          </div>
+          <div class="col-span-1">
+            {pageBuilder?.length ? (
+              <>
+                Page Builder: {pageBuilder?.length} items<br />
+                <ul class="pl-6">
+                  {pageBuilder?.map((item,n) => (
+                      <li>- {item._type}</li>
+                  ))}
+                </ul>
+              </>
+            ) : 'No page builder components'}
+          </div>
+      </div>
     </div>
+  </section>
 </Layout>

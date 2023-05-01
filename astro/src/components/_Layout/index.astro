@@ -1,0 +1,59 @@
+---
+import { SEO } from "astro-seo";
+import Footer from "./Footer/index.astro";
+import { Spa } from "astro-spa";
+import '../../styles/globals.scss'
+
+// export interface Props {
+// 	globalData: object,
+// 	title: string
+// }
+
+const { globalData, title } = Astro.props;
+// console.log('global', globalData)
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+
+		<SEO
+			title={title}
+			description="A heavily optimized description full of well-researched keywords."
+			openGraph={{
+				basic: {
+					title: {title},
+					type: "A type.",
+					image: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
+				}
+			}}
+			twitter={{
+				creator: "@jonasmerlins1"
+			}}
+			extend={{
+				// extending the default link tags
+				link: [{ rel: "icon", href: "/favicon.svg" }],
+
+				// extending the default meta tags
+				meta: [
+					{
+						name: "twitter:image",
+						content: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
+					},
+					{ name: "twitter:title", content: "Tinker Tailor Soldier Spy" },
+					{ name: "twitter:description", content: "Agent" },
+				],
+			}}
+			/>
+	</head>
+	<body class="min-h-screen flex flex-col justify-between">
+		<main>
+			<Spa />
+			<slot />
+		</main>
+		<Footer globalData={globalData}/>
+	</body>
+</html>
