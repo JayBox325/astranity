@@ -48,7 +48,6 @@ export default defineType({
     },
     prepare(selection) {
       const { title, childItems } = selection
-      console.log('children', childItems)
       return { ...selection, title: title, subtitle: childItems?.length ? `With ${childItems.length} children` : '' }
     },
   },

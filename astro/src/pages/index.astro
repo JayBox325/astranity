@@ -1,6 +1,7 @@
 ---
 import Layout from '../components/_Layout/index.astro'
 import { useSanityClient } from 'astro-sanity'
+import Hero from '../components/Hero/index.astro'
 import { getGlobalData } from '../utils/sanity/queries/getGlobalData'
 
 const globalData = await getGlobalData()
@@ -11,6 +12,8 @@ const homepage = await useSanityClient().fetch(`*[_type == "homepage"][0]{
 }`)
 ---
 
-<Layout globalData={globalData} title="Welcome to Astro.">
-	<h1>Homepage</h1>
+<Layout globalData={globalData} title={homepage.fieldSeo.title ?? 'Homepage'}>
+	<Hero
+		title="Astranity"
+	/>
 </Layout>

@@ -30,7 +30,6 @@ const { globalData } = Astro.props;
                 {item.childItems?.length ? (
                   <ul>
                     {item.childItems.map((child,n)=>{
-                      console.log('child', child)
                       return (
                         <li>
                           - <a href={`/${child?.childItem?.slug?.current}`}>{child.childItem?.title}</a>

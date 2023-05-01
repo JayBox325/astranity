@@ -1,0 +1,32 @@
+---
+const {title, body, image} = Astro.props;
+---
+
+<section class="row row--gray">
+
+    <img
+        src={`${image?.url?.url}`}
+        alt={image?.url?.altText}
+        class="absolute z-10 top-0 left-0 w-full h-full object-cover"
+        style={`object-position: ${image?.hotspot?.x * 100}% ${image?.hotspot?.y * 100}%`}
+    />
+
+    <!-- <div
+        class={`w-1 h-1 bg-red-500 rounded-full z-30 absolute -translate-x-1/2 -translate-y-1/2`}
+        style={`left: ${image?.hotspot?.x * 100}%; top:${image?.hotspot?.y * 100}%;`}
+    /> -->
+
+    <div class="container text-center relative z-20">
+
+        <h1 class="text-6xl font-bold">{title}</h1>
+        
+        <p>x {image?.hotspot?.y * 100}</p>
+
+        {body ? (
+            <div class="rich text-lg">
+                <p>{body}</p>
+            </div>
+        ) : ''}
+
+    </div>
+</section>

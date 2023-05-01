@@ -1,5 +1,6 @@
 ---
 import Layout from '../components/_Layout/index.astro'
+import Hero from '../components/Hero/index.astro'
 import { useSanityClient } from "astro-sanity";
 import { getGlobalData } from "../utils/sanity/queries/getGlobalData";
 
@@ -10,7 +11,8 @@ export async function getStaticPaths() {
     title,
     slug,
     "mainImage": {
-      "url": mainImage.asset->url,
+      "url": mainImage.asset->{url, altText},
+      "hotspot": mainImage.hotspot,
       "meta": mainImage.asset->metadata,
       "palette": mainImage.asset->metadata.palette
     },
@@ -31,38 +33,32 @@ export async function getStaticPaths() {
   });
 }
 
-console.log('✅', Astro.props)
-
 const {
   title,
   slug,
   mainImage,
   extract,
-  parent,
+  parent = {},
   fieldSeo,
   pageBuilder = []
 } = Astro.props;
 ---
 
-<Layout globalData={globalData} title={title}>
-  <section class="row row--gray">
+<Layout globalData={globalData} title={fieldSeo?.title ?? title}>
+  <Hero
+    title={title}
+    body={extract}
+    image={mainImage}
+  />
+  <section class="row row--white">
     <div class="container">
       <div class="grid grid-cols-1 gap-4">
-          <div class="col-span-1">
-              Page title: {title ?? "None"}
-          </div>
-          <div class="col-span-1">
-              Slug: {slug ? slug.current : "None"}
-          </div>
-          <div class="col-span-1">
-              Extract: {extract ?? "None"}
-          </div>
           <div class="col-span-1">
               Main Image URL: {mainImage.url ?? "None"}
           </div>
           <div class="col-span-1">
               Parent: {parent ? (
-                <a href={`/${parent.slug.current}`}>{parent?.title}</a>
+                <a href={`/${parent?.slug?.current}`}>{parent?.title}</a>
               ) : "None"}
           </div>
           <div class="col-span-1">
