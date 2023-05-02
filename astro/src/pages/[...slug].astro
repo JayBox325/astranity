@@ -10,12 +10,13 @@ export async function getStaticPaths() {
   const site = await useSanityClient().fetch(`*[_type == "site"]{
     title,
     slug,
-    "mainImage": {
-      "url": mainImage.asset->{url, altText},
-      "hotspot": mainImage.hotspot,
-      "meta": mainImage.asset->metadata,
-      "palette": mainImage.asset->metadata.palette
-    },
+    mainImage,
+    // "mainImage": {
+    //   "url": mainImage.asset->{url, altText},
+    //   "hotspot": mainImage.hotspot,
+    //   "meta": mainImage.asset->metadata,
+    //   "palette": mainImage.asset->metadata.palette
+    // },
     extract,
     parent->{
       title,
@@ -53,9 +54,9 @@ const {
   <section class="row row--white">
     <div class="container">
       <div class="grid grid-cols-1 gap-4">
-          <div class="col-span-1">
+          <!-- <div class="col-span-1">
               Main Image URL: {mainImage.url ?? "None"}
-          </div>
+          </div> -->
           <div class="col-span-1">
               Parent: {parent ? (
                 <a href={`/${parent?.slug?.current}`}>{parent?.title}</a>

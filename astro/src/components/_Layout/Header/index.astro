@@ -1,0 +1,13 @@
+---
+const {globalData} = Astro.props
+
+console.log('global', globalData)
+---
+
+<header class="sticky top-0 left-0 w-full bg-white">
+    <div class="container">
+        <div class="py-4">
+            <a href="/" class="inline-block -ml-3 rounded-md transition-colors bg-transparent hover:bg-gray-100 px-3 py-2 font-bold">{globalData.title}</a>
+        </div>
+    </div>
+</header>

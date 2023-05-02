@@ -1,32 +1,40 @@
 ---
-const {title, body, image} = Astro.props;
+const { title, body, image } = Astro.props;
+import imgUrl from "../../utils/helpers/imgUrl";
 ---
 
-<section class="row row--gray">
+<section class="row row--gray h-[40vh] flex items-center justify-center xl:h-[50vh]">
 
-    <img
-        src={`${image?.url?.url}`}
-        alt={image?.url?.altText}
-        class="absolute z-10 top-0 left-0 w-full h-full object-cover"
-        style={`object-position: ${image?.hotspot?.x * 100}% ${image?.hotspot?.y * 100}%`}
-    />
-
-    <!-- <div
-        class={`w-1 h-1 bg-red-500 rounded-full z-30 absolute -translate-x-1/2 -translate-y-1/2`}
-        style={`left: ${image?.hotspot?.x * 100}%; top:${image?.hotspot?.y * 100}%;`}
-    /> -->
+    {image ? (
+        <picture class="absolute top-0 left-0 w-full h-full">
+            <source
+                // media="(min-width: 0px)"
+                srcset={`${imgUrl(image).width(800).url()} 1x, ${imgUrl(image).width(1200).url()} 2x`}
+            />
+            <source
+                media="(min-width: 800px)"
+                srcset={`${imgUrl(image).width(1000).url()} 1x, ${imgUrl(image).width(1800).url()} 2x`}
+            />
+            <img
+                src={imgUrl(image).width(50).blur(20).quality(20).url()}
+                loading="lazy"
+                class="absolute z-10 top-0 left-0 w-full h-full object-cover"
+                style={`object-position: ${image?.hotspot?.x * 100}% ${image?.hotspot?.y * 100}%`}
+            />
+        </picture>
+    ) : ''}
 
     <div class="container text-center relative z-20">
+        <div class="bg-white px-6 py-4 inline-block rounded-md">
+            <h1 class="text-6xl leading-none font-bold">{title}</h1>
 
-        <h1 class="text-6xl font-bold">{title}</h1>
-        
-        <p>x {image?.hotspot?.y * 100}</p>
-
-        {body ? (
-            <div class="rich text-lg">
-                <p>{body}</p>
-            </div>
-        ) : ''}
-
+            {body ? (
+                <div class="rich text-lg">
+                    <p>{body}</p>
+                </div>
+            ) : (
+                ""
+            )}
+        </div>
     </div>
 </section>
