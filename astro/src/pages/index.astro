@@ -2,21 +2,16 @@
 import Layout from '../components/_Layout/index.astro'
 import Hero from '../components/Hero/index.astro'
 
-// import { useSanityClient } from 'astro-sanity'
-// import GET_GLOBAL_DATA from '../utils/sanity/queries/getGlobalData'
-// import GET_HOMEPAGE from '../utils/sanity/queries/getHomepage'
+import client from '../utils/sanity/client'
 
-// const globalData = await useSanityClient().fetch(GET_GLOBAL_DATA)
-// const content = await useSanityClient().fetch(GET_HOMEPAGE)
+import GET_GLOBAL_DATA from '../utils/sanity/queries/getGlobalData'
+import GET_HOMEPAGE from '../utils/sanity/queries/getHomepage'
 
-export async function getStaticPaths() {
-  return {
-    props: {}
-  }
-}
+const globalData = await client().fetch(GET_GLOBAL_DATA)
+const content = await client().fetch(GET_HOMEPAGE)
 ---
 
-{/*<Layout globalData={globalData} title={content.fieldSeo.title ?? 'Homepage'}>*/}
+<Layout globalData={globalData} title={content.fieldSeo.title ?? 'Homepage'}>
 <Layout title={'Homepage'}>
 	<Hero
 		title="Astranity"

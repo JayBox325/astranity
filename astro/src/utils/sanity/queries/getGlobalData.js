@@ -1,7 +1,7 @@
 import { groq } from 'astro-sanity';
 
 const GET_GLOBAL_DATA = groq` 
-    *[_type == "siteConfig"][0]{
+    *[_type == "siteConfig"]{
         title,
         mainNav[]{
             ...,
