@@ -17,13 +17,6 @@ export default defineConfig({
     port: command === 'dev' ? 6000 : 4000
   }),
 
-  // Fixes for Astro-icon
-  vite: {
-    ssr: {
-      external: ['svgo']
-    }
-  },
-
   // Plugins
   integrations: [compress(), sanity({
     projectId: PUBLIC_SANITY_PROJECT_ID,
