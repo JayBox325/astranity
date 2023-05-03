@@ -1,0 +1,90 @@
+---
+import Layout from '../components/_Layout/index.astro'
+import Hero from '../components/Hero/index.astro'
+import { useSanityClient } from "astro-sanity"
+import GET_GLOBAL_DATA from "../utils/sanity/queries/getGlobalData"
+import GET_SITE_PAGE_BY_SLUG from '../utils/sanity/queries/getSitePageBySlug'
+
+const slug = Astro.url.pathname.slice(1)
+const isPreview = Astro.url.searchParams.get('preview') || false
+
+// Static generation
+// export async function getStaticPaths() {
+//   const site = await useSanityClient().fetch(`*[_type == "site"]{
+//     title,
+//     slug,
+//     mainImage,
+//     // "mainImage": {
+//     //   "url": mainImage.asset->{url, altText},
+//     //   "hotspot": mainImage.hotspot,
+//     //   "meta": mainImage.asset->metadata,
+//     //   "palette": mainImage.asset->metadata.palette
+//     // },
+//     extract,
+//     parent->{
+//       title,
+//       slug
+//     },
+//     fieldSeo,
+//     // pageBuilder,
+//   }`);
+
+//   return site.map((page) => {
+//     return {
+//       params: { slug: page.slug.current },
+//       props: { page },
+//     };
+//   });
+// }
+
+// Data fetching
+const globalData = await useSanityClient().fetch(GET_GLOBAL_DATA)
+const content = await useSanityClient().fetch(GET_SITE_PAGE_BY_SLUG, {slug})
+
+// Redirect if content not found
+if (!content) return Astro.redirect('/404')
+
+const {
+  title,
+  extract,
+  mainImage,
+  parent,
+  pageBuilder,
+  fieldSeo
+} = content || {}
+---
+
+<Layout globalData={globalData} title={fieldSeo?.title ?? title}>
+  <Hero
+    title={title}
+    body={extract}
+    image={mainImage}
+  />
+  <section class="row row--white">
+    <div class="container">
+      <div class="grid grid-cols-1 gap-4">
+          <div class="col-span-1">
+              Parent: {parent ? (
+                <a href={`/${parent?.slug?.current}`}>{parent?.title}</a>
+              ) : "None"}
+          </div>
+          <div class="col-span-1">
+              SEO Title: {fieldSeo?.title ?? "None"},<br />
+              SEO Description: {fieldSeo?.description ?? "None"}
+          </div>
+          <div class="col-span-1">
+            {pageBuilder?.length ? (
+              <>
+                Page Builder: {pageBuilder?.length} items<br />
+                <ul class="pl-6">
+                  {pageBuilder?.map((item,n) => (
+                      <li>- {item._type}</li>
+                  ))}
+                </ul>
+              </>
+            ) : 'No page builder components'}
+          </div>
+      </div>
+    </div>
+  </section>
+</Layout>
