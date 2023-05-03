@@ -10,10 +10,10 @@ import fieldSeo from './Fields/fieldSeo'
 async function asyncSlugifier(input) {
 
   const client = createClient({
-    projectId: process.env.SANITY_PROJECT_ID || "uh41p3xe",
-    dataset: process.env.SANITY_DATASET || "production",
+    projectId: "uh41p3xe",
+    dataset: "production",
     useCdn: true,
-    apiVersion: process.env.SANITY_API_VERSION || "2023-03-25"
+    apiVersion: "2023-03-25"
   })
   
   const parentQuery = '*[_id == $id][0]'; // a GROQ query, feel free to change this up to match what you need
