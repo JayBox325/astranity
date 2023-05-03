@@ -3,7 +3,6 @@ import {createClient} from '@sanity/client'
 
 import { MdEditDocument,MdViewComfy, MdOutlineScreenSearchDesktop, MdInsertDriveFile } from "react-icons/md"
 import { FaCog } from "react-icons/fa"
-import fieldPublished from './Fields/fieldPublished'
 import fieldExtract from './Fields/fieldExtract'
 import fieldPageBuilder from './Fields/fieldPageBuilder'
 import fieldSeo from './Fields/fieldSeo'
