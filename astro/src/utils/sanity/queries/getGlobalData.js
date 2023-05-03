@@ -20,7 +20,7 @@ const GET_GLOBAL_DATA = groq`
         fieldSeo,
         socialAccounts,
         footerBody
-    }
+    }[0]
 `
 
 export default GET_GLOBAL_DATA

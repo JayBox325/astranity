@@ -4,6 +4,13 @@ import vercelServerless from '@astrojs/vercel/serverless';
 import vercelStatic from '@astrojs/vercel/static';
 import sanity from 'astro-sanity';
 
+// Environment variables
+import { loadEnv } from "vite"
+const { PUBLIC_SANITY_PROJECT_ID } = loadEnv(import.meta.env.PUBLIC_SANITY_PROJECT_ID, process.cwd(), "")
+const { PUBLIC_SANITY_DATASET } = loadEnv(import.meta.env.PUBLIC_SANITY_DATASET, process.cwd(), "")
+const { PUBLIC_SANITY_API_VERSION } = loadEnv(import.meta.env.PUBLIC_SANITY_API_VERSION, process.cwd(), "")
+const { PUBLIC_ASTRO_OUTPUT } = loadEnv(import.meta.env.PUBLIC_ASTRO_OUTPUT, process.cwd(), "")
+
 export default defineConfig({
   // Ports
   server: command => ({
@@ -12,16 +19,16 @@ export default defineConfig({
 
   // Plugins
   integrations: [compress(), sanity({
-    projectId: 'uh41p3xe',
-    dataset: 'production',
-    apiVersion: '2023-03-25',
+    projectId: PUBLIC_SANITY_PROJECT_ID,
+    dataset: PUBLIC_SANITY_DATASET,
+    apiVersion: PUBLIC_SANITY_API_VERSION,
     useCdn: true
   })],
   
   // Vercel
-  // output: "server",
-  // adapter: vercelServerless(),
+  output: PUBLIC_ASTRO_OUTPUT == 'server' ? 'server' : 'static',
+  adapter: PUBLIC_ASTRO_OUTPUT == 'server' ? vercelServerless() : vercelStatic(),
 
-  output: "static",
+  // output: "static",
   // adapter: vercelStatic(),
 });

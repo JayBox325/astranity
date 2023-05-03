@@ -35,7 +35,7 @@ const { globalData, title } = Astro.props
 			}}
 			extend={{
 				// extending the default link tags
-				link: [{ rel: "icon", href: "/favicon.svg" }],
+				// link: [{ rel: "icon", href: "/favicon.svg" }],
 
 				// extending the default meta tags
 				meta: [
@@ -51,10 +51,10 @@ const { globalData, title } = Astro.props
 	</head>
 	<body class="min-h-screen flex flex-col justify-between">
 		<main class="">
-			<!-- <Header globalData={globalData} /> -->
+			<Header globalData={globalData} />
 			<Spa />
 			<slot />
 		</main>
-		<!-- <Footer globalData={globalData}/> -->
+		<Footer globalData={globalData}/>
 	</body>
 </html>

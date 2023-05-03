@@ -4,14 +4,14 @@ const GET_SITE_PAGE_BY_SLUG = groq`
   *[_type == "site" && slug.current == $slug]{
     title,
     slug,
-    mainImage,
     extract,
     parent->{
-        title,
-        slug
+      title,
+      slug
     },
-    fieldSeo,
-    pageBuilder,
+    // mainImage,
+    // fieldSeo,
+    // pageBuilder,
   }[0]
 `
 
