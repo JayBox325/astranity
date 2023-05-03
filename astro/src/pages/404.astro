@@ -4,7 +4,11 @@
 // import GET_GLOBAL_DATA from '../utils/sanity/queries/getGlobalData';
 // const globalData = await useSanityClient().fetch(GET_GLOBAL_DATA)
 
-const globalData = {}
+export async function getStaticPaths() {
+  return {
+    props: {}
+  }
+}
 ---
 <h1>404</h1>
 <!-- <Layout globalData={globalData} title="404">
