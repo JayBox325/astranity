@@ -3,36 +3,33 @@ import PortableText from "../../../components/PortableText/index.astro"
 import SocialIcons from "../../../components/SocialIcons/index.astro"
 
 const currentYear = new Date().getFullYear()
-const { globalData } = Astro.props;
-
-// console.log('global', globalData)
-
+const { globalData } = Astro.props
 ---
 
 <footer class="row row--black py-10">
   <div class="container">
     <div class="grid gap-6 grid-cols-6 lg:grid-cols-12">
 
-      <div class="col-span-6 flex flex-col gap-4">
-        <PortableText portableText={globalData.footerBody} className={"max-w-lg"}/>
+      <div class="col-span-6 flex flex-col gap-6">
+        <div>
+          <h2 class="title-4 mb-3">{globalData.title}</h2>
+          <PortableText portableText={globalData.footerBody} className={"max-w-lg"}/>
+        </div>
         <SocialIcons socialAccounts={globalData.socialAccounts} />
-        <p class="text-sm pt-10">
-          &copy; {currentYear} - Starter Theme for <a href="https://astro.build/">Astro</a>.
-        </p>
       </div>
 
       <div class="col-span-6">
-        <ul>
+        <ul class="flex flex-col gap-2">
           {globalData.mainNav.map((item,n)=>{
             return (
               <li>
-                <a href={`/${item.menuItem.slug.current}`}>{item.menuItem.title}</a>
+                <a class="hover:underline" href={`/${item.menuItem.slug.current}`}>{item.menuItem.title}</a>
                 {item.childItems?.length ? (
-                  <ul>
+                  <ul class="flex flex-col pl-4">
                     {item.childItems.map((child,n)=>{
                       return (
                         <li>
-                          - <a href={`/${child?.childItem?.slug?.current}`}>{child.childItem?.title}</a>
+                          <a class="hover:underline" href={`/${child?.childItem?.slug?.current}`}>{child.childItem?.title}</a>
                         </li>
                       )
                     })}
@@ -42,6 +39,13 @@ const { globalData } = Astro.props;
             )
           })}
         </ul>
+      </div>
+
+      <div class="col-span-6 lg:col-span-12">
+
+        <p class="text-sm pt-10 text-center text-gray-500">
+          &copy; {currentYear}. {globalData.title}. Starter Theme for <a href="https://astro.build/" class="underline hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">Astro</a> & <a href="https://sanity.io/" class="underline hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">Sanity</a>.
+        </p>
       </div>
 
     </div>

@@ -1,7 +1,10 @@
 @tailwind base;
 // @tailwind components;
 
+@import './mixins/polyfluid-sizing.scss';
+
 @import'./typography/rich.scss';
+@import'./typography/headings.scss';
 
 @import'./components/accordion.scss';
 

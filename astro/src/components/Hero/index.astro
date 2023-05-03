@@ -3,7 +3,7 @@ const { title, body, image } = Astro.props;
 import imgUrl from "../../utils/helpers/imgUrl";
 ---
 
-<section class="row row--gray h-[40vh] flex items-center justify-center xl:h-[50vh]">
+<section class="row row--gray h-[40vh] min-h-[400px] flex items-center justify-center xl:min-h-[420px] xl:h-[50vh]">
 
     {image ? (
         <picture class="absolute top-0 left-0 w-full h-full">
@@ -26,7 +26,7 @@ import imgUrl from "../../utils/helpers/imgUrl";
 
     <div class="container text-center relative z-20">
         <div class="bg-white px-6 py-4 inline-block rounded-md">
-            <h1 class="text-6xl leading-none font-bold">{title}</h1>
+            <h1 class="">{title}</h1>
 
             {body ? (
                 <div class="rich text-lg">

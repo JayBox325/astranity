@@ -11,10 +11,6 @@ h5,
 h6,
 .title-6 {
     @apply leading-tight font-sans;
-
-    strong {
-        @apply font-sans font-normal text-highlight-500;
-    }
 }
 
 h1,
