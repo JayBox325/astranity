@@ -1,3 +1,3 @@
 ### Upcoming features
 
-[] Astro Live Preview
+- [ ] Astro Live Preview
