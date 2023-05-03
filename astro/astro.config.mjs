@@ -11,12 +11,12 @@ export default defineConfig({
   }),
 
   // Plugins
-  integrations: [compress(), sanity({
-    projectId: 'uh41p3xe',
-    dataset: 'production',
-    apiVersion: '2023-03-25',
-    useCdn: true
-  })],
+  // integrations: [compress(), sanity({
+  //   projectId: 'uh41p3xe',
+  //   dataset: 'production',
+  //   apiVersion: '2023-03-25',
+  //   useCdn: true
+  // })],
   
   // Vercel
   output: "server",
