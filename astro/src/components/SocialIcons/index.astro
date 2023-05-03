@@ -9,6 +9,7 @@ const { socialAccounts } = Astro.props;
         socialAccounts.map((item, n) => (
             <li>
                 <a class="rounded-full w-8 h-8 bg-white flex items-center justify-center text-black hover:bg-violet-500 hover:text-white transition-colors" href={item.url}>
+                    <span class="sr-only">{item.account}</span>
                     {item.account == 'Facebook' ? <Icon name="uil:facebook-f" class="w-6 h-6" /> : ''}
                     {item.account == 'Twitter' ? <Icon name="carbon:logo-twitter" class="w-6 h-6" /> : ''}
                     {item.account == 'Instagram' ? <Icon name="carbon:logo-instagram" class="w-6 h-6" /> : ''}

@@ -4,8 +4,6 @@ import vercelServerless from '@astrojs/vercel/serverless';
 // import vercelStatic from '@astrojs/vercel/static';
 import sanity from 'astro-sanity';
 
-
-// https://astro.build/config
 export default defineConfig({
   // Ports
   server: command => ({
