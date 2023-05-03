@@ -1,48 +1,28 @@
 ---
 import Layout from '../components/_Layout/index.astro'
 import Hero from '../components/Hero/index.astro'
-import { useSanityClient } from "astro-sanity";
-import { getGlobalData } from "../utils/sanity/queries/getGlobalData";
+import { useSanityClient } from "astro-sanity"
+import GET_GLOBAL_DATA from "../utils/sanity/queries/getGlobalData"
+import GET_SITE_PAGE_BY_SLUG from '../utils/sanity/queries/getSitePageBySlug'
 
-const globalData = await getGlobalData()
+const slug = Astro.url.pathname.slice(1)
+const isPreview = Astro.url.searchParams.get('preview') || false
 
-export async function getStaticPaths() {
-  const site = await useSanityClient().fetch(`*[_type == "site"]{
-    title,
-    slug,
-    mainImage,
-    // "mainImage": {
-    //   "url": mainImage.asset->{url, altText},
-    //   "hotspot": mainImage.hotspot,
-    //   "meta": mainImage.asset->metadata,
-    //   "palette": mainImage.asset->metadata.palette
-    // },
-    extract,
-    parent->{
-      title,
-      slug
-    },
-    fieldSeo,
-    // pageBuilder,
-  }`);
+// Data fetching
+const globalData = await useSanityClient().fetch(GET_GLOBAL_DATA)
+const content = await useSanityClient().fetch(GET_SITE_PAGE_BY_SLUG, {slug})
 
-  return site.map((item) => {
-    return {
-      params: { slug: item.slug.current },
-      props: item,
-    };
-  });
-}
+// Redirect if content not found
+if (!content) return Astro.redirect('/404')
 
 const {
   title,
-  slug,
-  mainImage,
   extract,
-  parent = {},
-  fieldSeo,
-  pageBuilder = []
-} = Astro.props;
+  mainImage,
+  parent,
+  pageBuilder,
+  fieldSeo
+} = content || {}
 ---
 
 <Layout globalData={globalData} title={fieldSeo?.title ?? title}>
@@ -54,9 +34,6 @@ const {
   <section class="row row--white">
     <div class="container">
       <div class="grid grid-cols-1 gap-4">
-          <!-- <div class="col-span-1">
-              Main Image URL: {mainImage.url ?? "None"}
-          </div> -->
           <div class="col-span-1">
               Parent: {parent ? (
                 <a href={`/${parent?.slug?.current}`}>{parent?.title}</a>

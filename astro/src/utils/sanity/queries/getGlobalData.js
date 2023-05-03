@@ -1,26 +1,23 @@
-import { useSanityClient, groq } from 'astro-sanity';
+import { groq } from 'astro-sanity';
 
-export async function getGlobalData() {
-  const query = groq` 
-    *[_type == "siteConfig"][0]{
+const GET_GLOBAL_DATA = groq` 
+*[_type == "siteConfig"][0]{
+    title,
+    mainNav[]{
+      ...,
+      menuItem->{
         title,
-        mainNav[]{
-          ...,
-          menuItem->{
-            title,
-            slug,    
-          },
-          childItems[]{
-            ...,
-            childItem->{title, slug},
-          },
-        },
-        fieldSeo,
-        socialAccounts,
-        footerBody
-    }
-  `
-  
-  const globalData = await useSanityClient().fetch(query)
-  return globalData
+        slug,    
+      },
+      childItems[]{
+        ...,
+        childItem->{title, slug},
+      },
+    },
+    fieldSeo,
+    socialAccounts,
+    footerBody
 }
+`
+
+export default GET_GLOBAL_DATA

@@ -1,7 +1,8 @@
 ---
 import Layout from '../components/_Layout/index.astro'
-import { getGlobalData } from '../utils/sanity/queries/getGlobalData';
-const globalData = await getGlobalData()
+import { useSanityClient } from 'astro-sanity'
+import GET_GLOBAL_DATA from '../utils/sanity/queries/getGlobalData';
+const globalData = await useSanityClient().fetch(GET_GLOBAL_DATA)
 ---
 
 <Layout globalData={globalData} title="404">
