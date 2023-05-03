@@ -26,8 +26,10 @@ export default defineConfig({
   })],
   
   // Vercel
-  output: PUBLIC_ASTRO_OUTPUT == 'server' ? 'server' : 'static',
-  adapter: PUBLIC_ASTRO_OUTPUT == 'server' ? vercelServerless() : vercelStatic(),
+  // output: PUBLIC_ASTRO_OUTPUT == 'server' ? 'server' : 'static',
+  // adapter: PUBLIC_ASTRO_OUTPUT == 'server' ? vercelServerless() : (vercelStatic()),
+
+  output: PUBLIC_ASTRO_OUTPUT, ...(PUBLIC_ASTRO_OUTPUT === "server" && {adapter: vercelServerless()})
 
   // output: "static",
   // adapter: vercelStatic(),
