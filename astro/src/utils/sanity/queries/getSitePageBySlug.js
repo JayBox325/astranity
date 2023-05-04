@@ -9,9 +9,9 @@ const GET_SITE_PAGE_BY_SLUG = groq`
       title,
       slug
     },
-    // mainImage,
-    // fieldSeo,
-    // pageBuilder,
+    mainImage,
+    fieldSeo,
+    pageBuilder,
   }[0]
 `
 
