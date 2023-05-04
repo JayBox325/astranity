@@ -1,5 +1,5 @@
-import {defineField, defineType} from 'sanity'
-import {createClient} from '@sanity/client'
+import { defineField, defineType } from 'sanity'
+import { createClient } from '@sanity/client'
 
 import { MdEditDocument,MdViewComfy, MdOutlineScreenSearchDesktop, MdInsertDriveFile } from "react-icons/md"
 import { FaCog } from "react-icons/fa"

@@ -3,7 +3,7 @@ const { title, body, image } = Astro.props;
 import imgUrl from "../../utils/helpers/imgUrl";
 ---
 
-<section class="row row--gray h-[40vh] min-h-[400px] flex items-center justify-center xl:min-h-[420px] xl:h-[50vh]">
+<section class={`row ${image ? '' : 'row--gray'} h-[40vh] min-h-[400px] flex items-center justify-center xl:min-h-[420px] xl:h-[50vh]`}>
 
     {image ? (
         <picture class="absolute top-0 left-0 w-full h-full">

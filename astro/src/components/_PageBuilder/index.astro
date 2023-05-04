@@ -1,0 +1,20 @@
+---
+import BodyText from '../BodyText/index.astro'
+const { content } = Astro.props || {}
+---
+
+{content?.length ? (
+    <>
+        {content.map((item,n) => {
+            switch (item._type) {
+                case 'bodyText':
+                    return <BodyText content={item} />
+                    break;
+            
+                default:
+                    return null
+                    break;
+            }
+        })}
+    </>
+) : ''}
