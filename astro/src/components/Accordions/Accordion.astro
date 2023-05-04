@@ -1,22 +1,28 @@
 ---
+import { Icon } from "astro-icon"
+
 const { id } = Astro.props;
 ---
 
 <li class="border-t-2 border-black accordion" data-accordion-item>
-    <h3>
+    <h3 class="title-5">
         <button
             data-accordion-btn
             aria-expanded="false"
             aria-controls={`accordion-panel-${id}`}
             class="py-2 flex items-center justify-between xl:py-3 block w-full text-left"
         >
-            Accordion item
+            <span>Accordion item</span>
+            <div class="relative w-5 h-5">
+                <div class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 h-0.5 w-full bg-black" />
+                <div class="absolute top-1/2 rotate-90 left-1/2 -translate-y-1/2 -translate-x-1/2 h-0.5 w-full bg-black transition-all accordion__line" />
+            </div>
         </button>
     </h3>
     <div
         id={`accordion-panel-${id}`}
         aria-labelledby={`accordion-panel-${id}`}
-        class={`grid transition-all relative duration-[400ms] grid-rows-[0fr] bg-red-500 accordion__panel`}
+        class={`grid transition-all relative duration-[400ms] grid-rows-[0fr] accordion__panel`}
     >
         <div class={`overflow-hidden accordion__content`}>
             <p>Accordion content here</p>
