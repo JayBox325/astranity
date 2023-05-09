@@ -1,119 +1,40 @@
 ---
-import Accordion from "./Accordion.astro";
+import Accordion from "./Accordion.astro"
 
-const { content } = Astro.props
-const { heading, accordions } = content
+const { content } = Astro.props;
+const { heading, accordions } = content;
 ---
 
-<section class="row row--white">
-    <div class="container">
-        <div class="max-w-2xl mx-auto">
-            {heading ? (
-                <h2 class="mb-6 xl:mb-8">{heading}</h2>
-            ) : ''}
-            <div data-accordion-container>
-                <div class="text-xs flex flex-row justify-end gap-2 mb-3">
-                    <button class="underline underline-offset-4 text-gray-500 hover:text-black" data-toggle-all="close">Close all</button>
-                    <button class="underline underline-offset-4 text-gray-500 hover:text-black" data-toggle-all="open">Open all</button>
+{accordions ? (
+    <>
+        <section class="row row--white">
+            <div class="container">
+                <div class="max-w-2xl mx-auto">
+                    {heading ? <h2 class="mb-6 xl:mb-8">{heading}</h2> : ""}
+                    <div data-accordion-container>
+                        <div class="text-xs flex flex-row justify-end gap-2 mb-3">
+                            <button
+                                class="underline underline-offset-4 text-gray-500 hover:text-black"
+                                data-toggle-all="close"
+                            >
+                                Close all
+                            </button>
+                            <button
+                                class="underline underline-offset-4 text-gray-500 hover:text-black"
+                                data-toggle-all="open"
+                            >
+                                Open all
+                            </button>
+                        </div>
+                        <ul>
+                            {accordions.map((item, n) => <Accordion id={item.id} />)}
+                        </ul>
+                    </div>
                 </div>
-                <ul >
-                    {accordions.map((item, n) => (
-                        <Accordion id={item.id} />
-                    ))}
-                </ul>
             </div>
-        </div>
-    </div>
-</section>
+            
+        </section>
 
-<script>
-    // Find all accordions
-    const items = document.querySelectorAll(`[data-accordion-item]`)
-    const toggleAllBtns = document.querySelectorAll(`[data-toggle-all]`)
-
-    // Handle the click
-    function handleToggle(accordion) {
-        if (accordion.classList.contains('is-active')) {
-            setInactive(accordion)
-        } else {
-            setActive(accordion)
-        }
-    }
-
-    // Set active
-    function setActive(accordion) {
-        const btn = accordion.querySelector('[data-accordion-btn]')
-        btn.setAttribute('aria-expanded', 'true')
-        accordion.classList.add('is-active')
-    }
-
-    // Set inactive
-    function setInactive(accordion) {
-        const btn = accordion.querySelector('[data-accordion-btn]')
-        btn.setAttribute('aria-expanded', 'false')
-        accordion.classList.remove('is-active')
-    }
-
-    // Keybinding to escape and arrows
-    document.addEventListener('keydown', event => {
-        const accordion = event.target.closest('[data-accordion-item]')
-
-        // If not an accordion, do nothing
-        if (!accordion) return null
-
-        // Close this accoridon if esc key pressed      
-        if (event.key === 'Escape') {
-            setInactive(accordion)
-        }
-
-        // Handle arrow navigation
-        const accordionWrapper = event.target.closest('[data-accordion-container]')
-        const accordionItems = [...accordionWrapper.querySelectorAll('[data-accordion-item]')]
-        const index = accordionItems.findIndex(element => element === accordion)
-        let targetItem
-
-        if (event.key === 'ArrowDown') {
-            targetItem = accordionItems[index + 1]
-        }
-
-        if (event.key === 'ArrowUp') {
-            targetItem = accordionItems[index - 1]
-        }
-
-        if (targetItem) {
-            event.preventDefault()
-            targetItem.querySelector('[data-accordion-btn   ]').focus()
-        }
-
-        return null
-    })
-
-    // Loop over all accordions and add events
-    items.forEach((item, index) => {
-        const btn = item.querySelector('[data-accordion-btn]')
-        btn.addEventListener('click',function() {handleToggle(item)})
-    })
-
-    function handleToggleAll(btn) {
-        const type = btn.getAttribute('data-toggle-all')
-        const accordionWrapper = btn.closest('[data-accordion-container]')
-        const accordionItems = [...accordionWrapper.querySelectorAll('[data-accordion-item]')]
-
-        if (type == 'close') {
-            accordionItems.forEach((item, index) => {
-                setInactive(item)
-            })
-        }
-
-        if (type == 'open') {
-            accordionItems.forEach((item, index) => {
-                setActive(item)
-            })
-        }
-    }
-
-    toggleAllBtns.forEach((btn, index) => {
-        btn.addEventListener('click',function() {handleToggleAll(btn)})
-    })
-        
-</script>
+        <script src="/src/scripts/accordions.js" type="module" />
+    </>
+) : ''}

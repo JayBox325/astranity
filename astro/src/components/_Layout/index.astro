@@ -1,8 +1,8 @@
 ---
-import { SEO } from "astro-seo";
-import Footer from "./Footer/index.astro";
-import Header from "./Header/index.astro";
-// import { Spa } from "astro-spa";
+import { SEO } from "astro-seo"
+import Footer from "./Footer/index.astro"
+import Header from "./Header/index.astro"
+import { Spa } from "astro-spa"
 import '../../styles/globals.scss'
 
 // export interface Props {
@@ -48,13 +48,16 @@ const { globalData, title } = Astro.props
 				],
 			}}
 		/>
+
 	</head>
 	<body class="min-h-screen flex flex-col justify-between">
 		<main class="">
 			<Header globalData={globalData} />
-			<!-- <Spa /> -->
 			<slot />
+			<!-- <Spa defaultAnimation={false} progressBar={false} /> -->
 		</main>
 		<Footer globalData={globalData}/>
+
 	</body>
+	
 </html>

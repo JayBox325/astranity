@@ -4,5 +4,5 @@ export default {
     description: 'Short body text to describe this post.',
     rows: 3,
     type: 'text',
-    group: 'default',
+    group: 'options',
   }

@@ -77,7 +77,7 @@ export default defineType({
         title: 'Entry type',
         name: 'entryType',
         type: 'string',
-        group: 'options',
+        group: 'content',
         initialValue: 'Standard Content',
         options: {
             list: [
