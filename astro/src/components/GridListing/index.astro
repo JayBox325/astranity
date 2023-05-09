@@ -1,0 +1,73 @@
+---
+import ListItem from "../../components/ListItem/index.astro"
+
+const {
+    items
+} = Astro.props || {}
+---
+
+{items.length > 0 ? (
+<section class="row row--white">
+    <div class="container">
+      <ul class="grid grid-cols-4 gap-4">
+        {items.map((item, n) => {
+          return <ListItem item={item} className="col-span-1"/>
+        })}
+      </ul>
+    </div>
+  </section>
+) : ''}
+
+<script>
+    // Find all news items
+    const items = document.querySelectorAll(`[data-like]`)
+    const { PUBLIC_SANITY_PROJECT_ID, PUBLIC_SANITY_DATASET, PUBLIC_SANITY_KEY, PUBLIC_SANITY_API_VERSION } = import.meta.env;
+
+    async function handleToggle(newValue, id, counter) {
+
+        const mutate = {
+            mutations: [
+                {
+                    patch: {
+                        id: id,
+                        set: {
+                            "likesCount": newValue.toString()
+                        }
+                    },
+                },
+            ],
+        };
+
+        const result = await fetch(
+            `https://${PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v${PUBLIC_SANITY_API_VERSION}/data/mutate/${PUBLIC_SANITY_DATASET}`,
+            {
+                method: "post",
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${PUBLIC_SANITY_KEY}`,
+                },
+                body: JSON.stringify(mutate),
+            }
+        )
+        .then(response => response.json())
+        .then(result => counter.innerHTML = newValue.toString())
+        .catch(error => console.error(error))
+    }
+
+    // Loop over all items and add events
+    items.forEach((item, index) => {
+        const counter = item.querySelector("[data-like-count]")
+        const btn = item.querySelector("[data-like-btn]")
+        const id = item.getAttribute('data-like')
+        // console.log('item', counter.innerHTML, btn)
+
+        btn.addEventListener("click", function () {
+            const initValue = counter.innerHTML
+            const newValue = Number(initValue)+1
+
+            counter.innerHTML = '🧸'
+
+            handleToggle(newValue, id, counter)
+        });
+    });
+</script>

@@ -1,0 +1,22 @@
+---
+const {
+    item,
+    className
+} = Astro.props || {}
+---
+
+{item ? (
+    <li class={className}>
+        <div class="bg-gray-100 rounded-lg p-6 relative">
+            <a class="hover:underline before:z-10 before:absolute before:top-0 before:left-0 before:w-full before:h-full" href={`/news/${item.slug.current}`}>{item.title}</a>
+            <div data-like={item._id}>
+                
+            {/* <div class="rounded-md inline-flex flex-row text-xs overflow-hidden mt-6">
+                <span data-like-count class="bg-blue-200 w-10 h-6 flex items-center justify-center">{item.likesCount ?? "0"}</span>
+                <button class="relative z-20 bg-gray-800 text-white px-3 h-6 flex items-center justify-center" data-like-btn>Like</button>
+            </div> */}
+
+            </div>
+        </div>
+    </li>
+) : ''}

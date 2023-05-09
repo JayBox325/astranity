@@ -1,0 +1,84 @@
+---
+import Layout from "../../components/_Layout/index.astro"
+import Hero from "../../components/Hero/index.astro"
+import PageBuilder from "../../components/_PageBuilder/index.astro"
+
+import client from "../../utils/sanity/client"
+
+import GET_GLOBAL_DATA from "../../utils/sanity/queries/getGlobalData"
+import GET_NEWS_BY_SLUG from "../../utils/sanity/queries/getNewsBySlug";
+
+const slug = Astro.url.pathname.replace("/news/","")
+// const slug = Astro.url.pathname.slice(1)
+console.log('✅ slug', slug)
+let page = {}
+// const isPreview = Astro.url.searchParams.get("preview") || false;
+
+// Global Data fetching
+const globalData = await client().fetch(GET_GLOBAL_DATA)
+
+// Fetching content if SSG
+export async function getStaticPaths() {
+  const site = await client().fetch(`*[_type == "post"]{
+    title,
+    slug,
+    extract,
+    mainImage,
+    likesCount,
+    fieldSeo,
+    pageBuilder
+  }`)
+
+  return site.map((page) => {
+    return {
+      params: { slug: `${page.slug.current}`},
+      props: { page },
+    }
+  })
+}
+
+// Fetching single page data if SSR
+if (import.meta.env.PUBLIC_ASTRO_OUTPUT == 'server') {
+  page = await client().fetch(GET_NEWS_BY_SLUG, { slug })
+  if (!page) return Astro.redirect("/404")
+}
+
+
+const { title, extract, likesCount, mainImage, pageBuilder, fieldSeo } = (Astro.props.page || page) || {}
+---
+
+
+<Layout globalData={globalData} title={fieldSeo?.title ?? title}>
+  <Hero title={title} body={extract} image={mainImage} />
+  <PageBuilder content={pageBuilder} />
+  <section class="row row--white">
+    <div class="container">
+      <div class="grid grid-cols-1 gap-4">
+        <div class="col-span-1">
+          Likes Count: {likesCount ?? "No likes"}
+        </div>
+        <div class="col-span-1">
+          SEO Title: {fieldSeo?.title ?? "None"},<br />
+          SEO Description: {fieldSeo?.description ?? "None"}
+        </div>
+        <div class="col-span-1">
+          {
+            pageBuilder?.length ? (
+              <>
+                Page Builder: {pageBuilder?.length} items
+                <br />
+                <ul class="pl-6">
+                  {pageBuilder?.map((item, n) => (
+                    <li>- {item._type}</li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              "No page builder components"
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

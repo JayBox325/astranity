@@ -4,6 +4,7 @@ import { FaCog } from "react-icons/fa"
 import fieldPublished from './Fields/fieldPublished'
 import fieldExtract from './Fields/fieldExtract'
 import fieldPageBuilder from './Fields/fieldPageBuilder'
+import { SlugInput } from 'sanity-plugin-prefixed-slug'
 import fieldSeo from './Fields/fieldSeo'
 
 export default defineType({
@@ -44,16 +45,35 @@ export default defineType({
       type: 'string',
       validation: Rule => Rule.required()
     }),
+    // defineField({
+    //   name: 'slug',
+    //   title: 'Slug',
+    //   type: 'slug',
+    //   group: 'default',
+    //   options: {
+    //     source: 'title',
+    //     maxLength: 96,
+    //   },
+    //   validation: Rule => Rule.required()
+    // }),
+
     defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      group: 'default',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
-      validation: Rule => Rule.required()
+        name: 'slug',
+        type: 'slug',
+        // Add the custom input to the `component` object of your field
+        components: {
+          input: SlugInput,
+        },
+        options: {
+          source: 'title',
+          urlPrefix: 'news/',
+          // Use isUnique/maxLength just like you would w/ the regular slug field
+          // isUnique: MyCustomIsUniqueFunction,
+          maxLength: 30,
+          // If you want to save the full URL in the slug object, set storeFullUrl to `true`
+          // Example storage: { _type: "slug", current: "my-slug", fullUrl: "https://site.com/my-slug" }
+          storeFullUrl: true,
+        },
     }),
 
     // Content
@@ -85,6 +105,14 @@ export default defineType({
       of: [{type: 'reference', to: {type: 'category'}}],
     }),
     defineField(fieldSeo),
+    defineField({
+      name: 'likesCount',
+      title: 'Likes Count',
+      description: 'This is a read-only field as it is used to track likes from users',
+      type: 'string',
+      readOnly: false,
+      group: 'options',
+    }),
   ],
 
   preview: {

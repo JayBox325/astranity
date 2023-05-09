@@ -5,6 +5,7 @@ const GET_SITE_PAGE_BY_SLUG = groq`
     title,
     slug,
     extract,
+    entryType,
     parent->{
       title,
       slug

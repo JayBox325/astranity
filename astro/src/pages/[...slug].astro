@@ -2,33 +2,36 @@
 import Layout from "../components/_Layout/index.astro"
 import Hero from "../components/Hero/index.astro"
 import PageBuilder from "../components/_PageBuilder/index.astro"
+import GridListing from "../components/GridListing/index.astro"
 
-import client from "../utils/sanity/client"
+import client from "../utils/sanity/client";
 
-import GET_GLOBAL_DATA from "../utils/sanity/queries/getGlobalData"
+import GET_GLOBAL_DATA from "../utils/sanity/queries/getGlobalData";
 import GET_SITE_PAGE_BY_SLUG from "../utils/sanity/queries/getSitePageBySlug";
+import GET_ALL_NEWS from "../utils/sanity/queries/getAllNews";
 
-const slug = Astro.url.pathname.slice(1)
-let page = {}
+const slug = Astro.url.pathname.slice(1);
+let page = {};
+let newsEntries = [];
 // const isPreview = Astro.url.searchParams.get("preview") || false;
 
 // Global Data fetching
-const globalData = await client().fetch(GET_GLOBAL_DATA)
+const globalData = await client().fetch(GET_GLOBAL_DATA);
 
 // Fetching content if SSG
 export async function getStaticPaths() {
-
   const site = await client().fetch(`*[_type == "site"]{
     title,
     slug,
     extract,
+    entryType,
     parent->{
       title,
       slug
     },
-    // mainImage,
-    // fieldSeo,
-    // pageBuilder,
+    mainImage,
+    fieldSeo,
+    pageBuilder,
   }`);
 
   return site.map((page) => {
@@ -40,22 +43,36 @@ export async function getStaticPaths() {
 }
 
 // Fetching single page data if SSR
-if (import.meta.env.PUBLIC_ASTRO_OUTPUT == 'server') {
-  page = await client().fetch(GET_SITE_PAGE_BY_SLUG, { slug })
+if (import.meta.env.PUBLIC_ASTRO_OUTPUT == "server") {
+  page = await client().fetch(GET_SITE_PAGE_BY_SLUG, { slug });
   if (!page) return Astro.redirect("/404");
 }
 
+const { title, extract, mainImage, entryType, parent, pageBuilder, fieldSeo } =
+  Astro.props.page || page || {};
 
-const { title, extract, mainImage, parent, pageBuilder, fieldSeo } = (Astro.props.page || page) || {}
+// Fetch news if it's a news listing template
+if (entryType == "News Listing") {
+  newsEntries = await client().fetch(GET_ALL_NEWS);
+}
 ---
-
 
 <Layout globalData={globalData} title={fieldSeo?.title ?? title}>
   <Hero title={title} body={extract} image={mainImage} />
   <PageBuilder content={pageBuilder} />
+  {
+    entryType == "News Listing" ? (
+      <GridListing items={newsEntries} />
+    ) : (
+      ""
+    )
+  }
   <section class="row row--white">
     <div class="container">
       <div class="grid grid-cols-1 gap-4">
+        <div class="col-span-1">
+          Entry Type: {entryType}
+        </div>
         <div class="col-span-1">
           Parent: {
             parent ? (

@@ -3,8 +3,6 @@ import Accordion from "./Accordion.astro";
 
 const { content } = Astro.props
 const { heading, accordions } = content
-
-console.log('content', content)
 ---
 
 <section class="row row--white">
@@ -32,8 +30,6 @@ console.log('content', content)
     // Find all accordions
     const items = document.querySelectorAll(`[data-accordion-item]`)
     const toggleAllBtns = document.querySelectorAll(`[data-toggle-all]`)
-
-    console.log('toggle all', toggleAllBtns)
 
     // Handle the click
     function handleToggle(accordion) {

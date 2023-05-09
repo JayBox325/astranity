@@ -41,7 +41,7 @@ export default defineType({
   groups: [
     {
       name: 'default',
-      title: 'Post',
+      title: 'Page',
       icon: MdEditDocument,
       default: true
     },
@@ -73,6 +73,20 @@ export default defineType({
       validation: Rule => Rule.required()
     }),
     defineField(fieldSeo),
+    {
+        title: 'Entry type',
+        name: 'entryType',
+        type: 'string',
+        group: 'options',
+        initialValue: 'Standard Content',
+        options: {
+            list: [
+                'Standard Content',
+                'News Listing'
+            ],
+        },
+        validation: Rule => Rule.required()
+    },
     defineField({
       name: 'slug',
       title: 'Slug',

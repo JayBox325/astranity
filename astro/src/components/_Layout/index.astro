@@ -2,7 +2,7 @@
 import { SEO } from "astro-seo";
 import Footer from "./Footer/index.astro";
 import Header from "./Header/index.astro";
-import { Spa } from "astro-spa";
+// import { Spa } from "astro-spa";
 import '../../styles/globals.scss'
 
 // export interface Props {
@@ -19,13 +19,13 @@ const { globalData, title } = Astro.props
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-
+		
 		<SEO
 			title={title}
 			description="A heavily optimized description full of well-researched keywords."
 			openGraph={{
 				basic: {
-					title: {title},
+					title: title,
 					type: "A type.",
 					image: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
 				}
@@ -52,7 +52,7 @@ const { globalData, title } = Astro.props
 	<body class="min-h-screen flex flex-col justify-between">
 		<main class="">
 			<Header globalData={globalData} />
-			<Spa />
+			<!-- <Spa /> -->
 			<slot />
 		</main>
 		<Footer globalData={globalData}/>
