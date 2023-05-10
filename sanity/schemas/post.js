@@ -45,17 +45,6 @@ export default defineType({
       type: 'string',
       validation: Rule => Rule.required()
     }),
-    // defineField({
-    //   name: 'slug',
-    //   title: 'Slug',
-    //   type: 'slug',
-    //   group: 'default',
-    //   options: {
-    //     source: 'title',
-    //     maxLength: 96,
-    //   },
-    //   validation: Rule => Rule.required()
-    // }),
 
     defineField({
         name: 'slug',
@@ -74,6 +63,7 @@ export default defineType({
           // Example storage: { _type: "slug", current: "my-slug", fullUrl: "https://site.com/my-slug" }
           storeFullUrl: true,
         },
+        validation: Rule => Rule.required()
     }),
 
     // Content
