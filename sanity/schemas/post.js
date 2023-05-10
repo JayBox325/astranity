@@ -50,6 +50,7 @@ export default defineType({
     defineField({
         name: 'slug',
         type: 'slug',
+        group: 'default',
         // Add the custom input to the `component` object of your field
         components: {
           input: SlugInput,
@@ -110,15 +111,15 @@ export default defineType({
     select: {
       title: 'title',
       author: 'author.name',
-      published: 'publishedAt',
+      // published: 'publishedAt',
       media: 'mainImage',
     },
     prepare(selection) {
-      const {author, published} = selection
-      const date = new Date(published)
-      const formattedDate = `${date.getDate()} ${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`
+      const {author} = selection
+      // const date = new Date(published)
+      // const formattedDate = `${date.getDate()} ${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`
 
-      return {...selection, subtitle:`${author ? `${author} \u1B7C`: ''} ${published ? `${formattedDate}` : 'Not yet  published'}`}
+      return {...selection, subtitle:`${author ? `${author}`: ''}`}
     },
   },
 })
