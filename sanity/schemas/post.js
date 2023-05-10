@@ -2,6 +2,7 @@ import {defineField, defineType} from 'sanity'
 import { MdEditDocument,MdInsertDriveFile,MdOutlineScreenSearchDesktop,MdViewComfy } from "react-icons/md"
 import { FaCog } from "react-icons/fa"
 import fieldPublished from './Fields/fieldPublished'
+import { BiNews } from "react-icons/bi"
 import fieldExtract from './Fields/fieldExtract'
 import fieldPageBuilder from './Fields/fieldPageBuilder'
 import { SlugInput } from 'sanity-plugin-prefixed-slug'
@@ -10,7 +11,7 @@ import fieldSeo from './Fields/fieldSeo'
 export default defineType({
   name: 'post',
   title: 'Post',
-  icon: MdInsertDriveFile,
+  icon: BiNews,
   type: 'document',
   groups: [
     {
